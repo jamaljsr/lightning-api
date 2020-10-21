@@ -10,6 +10,7 @@ import subprocess
 
 PROTO_DIR = os.environ.get('PROTO_DIR')
 EXPERIMENTAL_PACKAGES = os.environ.get('EXPERIMENTAL_PACKAGES')
+EXCLUDE_SERVICES = os.environ.get('EXCLUDE_SERVICES')
 REPO_URL = os.environ.get('REPO_URL')
 COMMIT = os.environ.get('COMMIT')
 COMMAND = os.getenv('COMMAND')
@@ -82,7 +83,7 @@ def render_grpc():
         service['methods'].sort(key=lambda m: m['fullName'])
 
     # Convert the services into a dictionary ordered by index.
-    services_list = [v for k, v in grpc_services.items()]
+    services_list = [v for k, v in grpc_services.items() if v['name'] not in EXCLUDE_SERVICES]
     services_list.sort(key=lambda m: m['index'])
 
     # Sort all other lists.

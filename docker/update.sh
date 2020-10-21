@@ -34,7 +34,7 @@ function compile() {
 
   # Render the new docs.
   cp templates/${COMPONENT}_header.md $APPEND_TO_FILE
-  export EXPERIMENTAL_PACKAGES PROTO_DIR PROTO_SRC_DIR WS_ENABLED COMMIT REPO_URL COMMAND COMPONENT APPEND_TO_FILE GRPC_PORT REST_PORT
+  export EXPERIMENTAL_PACKAGES EXCLUDE_SERVICES PROTO_DIR PROTO_SRC_DIR WS_ENABLED COMMIT REPO_URL COMMAND COMPONENT APPEND_TO_FILE GRPC_PORT REST_PORT
   ./render.py
   cat templates/${COMPONENT}_footer.md >> $APPEND_TO_FILE
 }
@@ -64,6 +64,7 @@ COMPONENT=lnd
 COMMAND=lncli
 PROTO_SRC_DIR=lnrpc
 EXCLUDE_PROTOS="none"
+EXCLUDE_SERVICES="none"
 EXPERIMENTAL_PACKAGES="signrpc walletrpc chainrpc invoicesrpc watchtowerrpc"
 INSTALL_CMD="make clean && make install tags=\"$EXPERIMENTAL_PACKAGES\""
 APPEND_TO_FILE=source/lnd.html.md
@@ -80,6 +81,7 @@ COMPONENT=loop
 COMMAND=loop
 PROTO_SRC_DIR=looprpc
 EXCLUDE_PROTOS="server.proto"
+EXCLUDE_SERVICES="none"
 EXPERIMENTAL_PACKAGES=""
 INSTALL_CMD="make install"
 APPEND_TO_FILE=source/loop.html.md
@@ -96,6 +98,7 @@ COMPONENT=faraday
 COMMAND=frcli
 PROTO_SRC_DIR=frdrpc
 EXCLUDE_PROTOS="none"
+EXCLUDE_SERVICES="none"
 EXPERIMENTAL_PACKAGES=""
 INSTALL_CMD="make install"
 APPEND_TO_FILE=source/faraday.html.md
@@ -112,6 +115,7 @@ COMPONENT=pool
 COMMAND=poolrpc
 PROTO_SRC_DIR=poolrpc
 EXCLUDE_PROTOS="none"
+EXCLUDE_SERVICES="ChannelAuctioneer"
 EXPERIMENTAL_PACKAGES=""
 INSTALL_CMD="make install"
 APPEND_TO_FILE=source/pool.html.md
