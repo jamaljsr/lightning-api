@@ -29,6 +29,9 @@ RUN bundle config set path 'vendor/bundle' \
 COPY install_proto.sh /tmp/work/
 RUN /tmp/work/install_proto.sh
 
+# You need to create an access token (https://github.com/settings/tokens) to pull private repos
+ARG GITHUB_ACCESS_TOKEN=empty
+
 # Compile both projects to have most dependencies and build steps cached.
 RUN git clone https://github.com/lightningnetwork/lnd /tmp/lnd \
   && cd /tmp/lnd \
@@ -39,6 +42,10 @@ RUN git clone https://github.com/lightningnetwork/lnd /tmp/lnd \
   && git clone https://github.com/lightninglabs/faraday /tmp/faraday \
   && cd /tmp/faraday \
   && make \
+  && go env -w GOPRIVATE=github.com/lightninglabs/pool \
+  && go env -w GOSUMDB=off \
+  && go env -w GOPROXY=direct \
+  && git config --global url."https://${GITHUB_ACCESS_TOKEN}:x-oauth-basic@github.com/lightninglabs".insteadOf "https://github.com/lightninglabs" \
   && git clone https://github.com/lightninglabs/pool /tmp/pool \
   && cd /tmp/pool \
   && make

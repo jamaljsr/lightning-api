@@ -29,6 +29,7 @@ To just run everything, you can skip this step as the scripts will just use the
 image `guggero/lightning-api` from Docker Hub.
 
 ```shell script
+GITHUB_ACCESS_TOKEN=...
 ./docker/9-rebuild-image.sh
 ```
 
