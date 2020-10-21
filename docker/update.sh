@@ -112,7 +112,7 @@ compile
 REPO_URL="https://github.com/${POOL_FORK}/pool"
 CHECKOUT_COMMIT=$POOL_COMMIT
 COMPONENT=pool
-COMMAND=poolrpc
+COMMAND=pool
 PROTO_SRC_DIR=poolrpc
 EXCLUDE_PROTOS="none"
 EXCLUDE_SERVICES="ChannelAuctioneer"
